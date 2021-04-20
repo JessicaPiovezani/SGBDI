@@ -1,8 +1,8 @@
 import tabula
 import csv
-import conexaoBD
-cursor = conexaoBD.cursor()
-
+from conexaoBD import conexaoSQL
+conn = conexaoSQL()
+cursor = conn.cursor()
 
 #Realiza a leitura de todas as páginas do PDF
 #tabelaProdutos = tabula.read_pdf('produtos.pdf', pages='all');
@@ -22,6 +22,7 @@ with open('categorias.csv') as categorias:
     cursor.execute("""INSERT INTO [DBO].[categorias] ([IdCategoria],[NomeCategoria])  VALUES  ({0}, {1})""")
     print(idCategoria, nomeCategoria)
 
+conn.commit()
 """with open('produtos.csv') as produtos:
 
   tabelaProdutos = csv.reader(produtos, delimiter=',')
