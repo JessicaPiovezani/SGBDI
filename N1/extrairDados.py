@@ -1,9 +1,12 @@
 import tabula
 import csv
-from conexaoBD import conexaoSQL
-conn = conexaoSQL()
+import pyodbc
+#from conexaoBD import conexaoSQL
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-BPODJN2\SQLEXPRESS;'
+                      'Database=BD_AnaliseVendas;'
+                      'Trusted_Connection=yes;')
 cursor = conn.cursor()
-
 #Realiza a leitura de todas as páginas do PDF
 #tabelaProdutos = tabula.read_pdf('produtos.pdf', pages='all');
 
@@ -22,7 +25,7 @@ with open('categorias.csv') as categorias:
     cursor.execute("""INSERT INTO [DBO].[categorias] ([IdCategoria],[NomeCategoria])  VALUES  ({0}, {1})""")
     print(idCategoria, nomeCategoria)
 
-conn.commit()
+conn.conexao.commit()
 """with open('produtos.csv') as produtos:
 
   tabelaProdutos = csv.reader(produtos, delimiter=',')
