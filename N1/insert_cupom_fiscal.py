@@ -31,13 +31,11 @@ while i <= 100000:
         for x in valores:
             preco_total = preco_total + x
 
-        count = cursor.execute('''
-            INSERT INTO [dbo].[cupomFiscal] ([id], [total]) VALUES (?, ?)''', id, preco_total).rowcount
+        count = cursor.execute('''INSERT INTO [dbo].[cupomFiscal] ([id], [total]) VALUES (?, ?)''', id, preco_total).rowcount
         conexao.commit()
 
         for j in itens:
-            count = cursor.execute('''
-            INSERT INTO [dbo].[cupom_item] ([id_cupom], [id_item]) VALUES (?, ?)''', id, j).rowcount
+            count = cursor.execute('''INSERT INTO [dbo].[cupom_item] ([id_cupom], [id_item]) VALUES (?, ?)''', id, j).rowcount
             conexao.commit()
         i+1
 

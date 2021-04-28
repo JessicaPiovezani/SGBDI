@@ -15,8 +15,7 @@ while i <= 50:
         id = i
         palavra = "categoria " + str(i)
 
-        count = cursor.execute("""
-        INSERT INTO categorias (id, categoria) VALUES (?,?)""", id, palavra).rowcount
+        count = cursor.execute("""INSERT INTO categorias (id, categoria) VALUES (?,?)""", id, palavra).rowcount
         conexao.commit()
         print("Cadastro %d inserido com sucesso! ID:" %i)
         i+1
