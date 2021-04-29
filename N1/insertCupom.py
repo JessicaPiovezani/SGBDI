@@ -1,6 +1,5 @@
 from conexaoBD import Conexao
-from random import choice
-import random
+from random import *
 import pyodbc
 import time
 import string
@@ -10,9 +9,9 @@ cursor = conexao.cursor()
 
 tempo_inicial = time.time()
 
-for i in range(10):
+for i in range(100000):
+    
     try:
-
         #Randômico para gerar os códigos do cupom
         tamanho = 12
         valores = string.ascii_letters + string.digits + string.punctuation

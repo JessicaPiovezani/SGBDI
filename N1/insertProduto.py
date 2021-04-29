@@ -8,14 +8,16 @@ cursor = conexao.cursor()
 
 tempo_inicial = time.time()
 
-for i in range(50000):    
+for i in range(50000):   
+
     try:
-        
+        #Definição das informações que compõe o produto
         nomeProduto = "produto " + str(i)
         idCategoria = random.randint(1, 50)
         numero = random.uniform(1, 100)
         valorUnitario = round(numero, 2)
 
+        #Insere os produtos no banco de dados
         count = cursor.execute("INSERT INTO produtos (nomeProduto, idCategoria, valorUnitario) VALUES ( ?, ?, ?)", nomeProduto, idCategoria, valorUnitario)
 
     except (Exception, pyodbc.Error) as error:

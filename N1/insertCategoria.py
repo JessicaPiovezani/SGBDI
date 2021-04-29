@@ -6,10 +6,14 @@ conexao = Conexao().get_connection()
 cursor = conexao.cursor()
 
 tempo_inicial = time.time()
+
 for i in range(50):
-    
+
     try:
+        #Definindo o nome da categoria
         nomeCategoria = "categoria " + str(i)
+
+        #Inserindo a categoria no banco de dados
         count = cursor.execute("INSERT INTO categorias (nomeCategoria) VALUES (?)", nomeCategoria).rowcount
         
     except (Exception, pyodbc.Error) as error:
