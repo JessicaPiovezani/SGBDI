@@ -15,8 +15,12 @@ class Consultas():
                 GROUP BY p.nomeProduto 
                 ORDER BY quantidadeVendas DESC;''')
         
+        produtosMaisVendidos = cursor.fetchall()
+        
         tempo_final = time.time()
         
+        print(produtosMaisVendidos)
+        conexao.close()   
         return print("Tempo total de execução: ", tempo_final - tempo_inicial)
     
     def get_valorVendidoCategorias(self):
@@ -31,6 +35,12 @@ class Consultas():
                 AND p.idCategoria = c.IdCategoria
                 GROUP BY c.nomeCategoria ORDER BY totalVendas DESC;''')
         
+        valorVendidoCategorias = cursor.fetchall()
+        
         tempo_final = time.time()
         
+        print(valorVendidoCategorias)
+        conexao.close()
         return print("Tempo total de execução: ", tempo_final - tempo_inicial)
+
+Consultas().get_valorVendidoCategorias();

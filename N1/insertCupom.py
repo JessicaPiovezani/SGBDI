@@ -51,5 +51,6 @@ for i in range(100000):
         conexao.commit()
         print("Cadastro inserido com sucesso!", i)
 
+conexao.close()
 tempo_final = time.time()
 print("Tempo total de execução: ", tempo_final - tempo_inicial)
