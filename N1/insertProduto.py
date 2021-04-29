@@ -3,36 +3,42 @@ import pyodbc
 import random
 import time
 
-conexao = Conexao().get_connection()
-cursor = conexao.cursor()
+class Produto():
+    def insert_Produtos(self):
+        conexao = Conexao().get_connection()
+        cursor = conexao.cursor()
 
-tempo_inicial = time.time()
+        print("\nIniciando inserção de produtos...\n")
 
-for i in range(50000):   
+        tempo_inicial = time.time()
 
-    try:
-        #Definição das informações que compõe o produto
-        nomeProduto = ("Produto %d" %i)
-        
-        numero = random.uniform(1, 100)
-        valorUnitario = round(numero, 2)
+        for i in range(50):   
 
-        #Selecionando categorias já existentes no banco de dados de forma randomica
-        cursor.execute("SELECT TOP(1) idCategoria FROM categorias order by NEWID()")
-        categoria = cursor.fetchall()[0]
+            try:
+                #Definição das informações que compõe o produto
+                nomeProduto = ("Produto %d" %i)
+                
+                numero = random.uniform(1, 100)
+                valorUnitario = round(numero, 2)
 
-        #Insere os produtos no banco de dados
-        count = cursor.execute("INSERT INTO produtos (nomeProduto, idCategoria, valorUnitario) VALUES ( ?, ?, ?)", nomeProduto, categoria.idCategoria, valorUnitario)
+                #Selecionando categorias já existentes no banco de dados de forma randomica
+                cursor.execute("SELECT TOP(1) idCategoria FROM categorias order by NEWID()")
+                categoria = cursor.fetchall()[0]
 
-    except (Exception, pyodbc.Error) as error:
-        print("Oppss! Algum erro aconteceu :/", error)
-        print("ID do cadastro em que o erro aconteceu:", i)
-        break
+                #Insere os produtos no banco de dados
+                count = cursor.execute("INSERT INTO produtos (nomeProduto, idCategoria, valorUnitario) VALUES ( ?, ?, ?)", nomeProduto, categoria.idCategoria, valorUnitario)
 
-    finally:
-        conexao.commit()
-        print("Cadastro inserido com sucesso!", i)
+            except (Exception, pyodbc.Error) as error:
+                print("Oppss! Algum erro aconteceu :/", error)
+                print("ID do cadastro em que o erro aconteceu:", i)
+                break
 
-conexao.close()
-tempo_final = time.time()
-print("Tempo total de execução: ", tempo_final - tempo_inicial)
+            finally:
+                conexao.commit()
+                print("Cadastro inserido com sucesso!", i+1)
+
+        tempo_final = time.time()
+
+        conexao.close()
+
+        return print("\nScript executado com sucesso! \n\nTempo total de execução: ", tempo_final - tempo_inicial)
