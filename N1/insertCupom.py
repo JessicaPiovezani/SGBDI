@@ -1,5 +1,6 @@
 from conexaoBD import Conexao
-from random import *
+from random import choice
+import random
 import pyodbc
 import time
 import string
@@ -36,7 +37,7 @@ for i in range(100000):
             produto = cursor.fetchall()[0]
             
             #Define uma quantidade de produtos para o item do cupom
-            quantidadeProduto = random.randint(1, 3)
+            quantidadeProduto = random.randint(1, 10)
             
             #insere o item do cupom
             cursor.execute("INSERT INTO itensCupom (idProduto, quantidadeProduto, idCupom, valorProduto) VALUES (?,?,?,?)", produto.idProduto, quantidadeProduto, idCupom, produto.valorUnitario)    

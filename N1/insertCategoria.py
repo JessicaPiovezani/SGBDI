@@ -11,10 +11,10 @@ for i in range(50):
 
     try:
         #Definindo o nome da categoria
-        nomeCategoria = "categoria " + str(i)
+        nomeCategoria = ("Categoria %d" %i)
 
         #Inserindo a categoria no banco de dados
-        count = cursor.execute("INSERT INTO categorias (nomeCategoria) VALUES (?)", nomeCategoria).rowcount
+        count = cursor.execute("INSERT INTO categorias (nomeCategoria) VALUES (?)", nomeCategoria)
         
     except (Exception, pyodbc.Error) as error:
         print("Oppss! Algum erro aconteceu :/", error)

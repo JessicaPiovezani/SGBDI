@@ -12,13 +12,17 @@ for i in range(50000):
 
     try:
         #Definição das informações que compõe o produto
-        nomeProduto = "produto " + str(i)
-        idCategoria = random.randint(1, 50)
+        nomeProduto = ("Produto %d" %i)
+        
         numero = random.uniform(1, 100)
         valorUnitario = round(numero, 2)
 
+        #Selecionando categorias já existentes no banco de dados de forma randomica
+        cursor.execute("SELECT TOP(1) idCategoria FROM categorias order by NEWID()")
+        categoria = cursor.fetchall()[0]
+
         #Insere os produtos no banco de dados
-        count = cursor.execute("INSERT INTO produtos (nomeProduto, idCategoria, valorUnitario) VALUES ( ?, ?, ?)", nomeProduto, idCategoria, valorUnitario)
+        count = cursor.execute("INSERT INTO produtos (nomeProduto, idCategoria, valorUnitario) VALUES ( ?, ?, ?)", nomeProduto, categoria.idCategoria, valorUnitario)
 
     except (Exception, pyodbc.Error) as error:
         print("Oppss! Algum erro aconteceu :/", error)
